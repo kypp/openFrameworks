@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_PropertySheetDisplayName>openFrameworksDebug</_PropertySheetDisplayName>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\libs\openframeworks\libs\openFrameworks;..\libs\openframeworks\..\libs\openframeworks\graphics;..\libs\openframeworks\..\libs\openframeworks\app;..\libs\openframeworks\..\libs\openframeworks\sound;..\libs\openframeworks\..\libs\openframeworks\utils;..\libs\openframeworks\..\libs\openframeworks\communication;..\libs\openframeworks\..\libs\openframeworks\video;..\libs\openframeworks\..\libs\openframeworks\types;..\libs\openframeworks\..\libs\openframeworks\math;..\libs\openframeworks\..\libs\openframeworks\3d;..\libs\openframeworks\..\libs\openframeworks\gl;..\libs\openframeworks\..\libs\openframeworks\events;..\libs\openframeworks\libs\glut\include;..\libs\openframeworks\libs\rtAudio\include;..\libs\openframeworks\libs\quicktime\include;..\libs\openframeworks\libs\freetype\include;..\libs\openframeworks\libs\freetype\include\freetype2;..\libs\openframeworks\libs\freeImage\include;..\libs\openframeworks\libs\fmodex\include;..\libs\openframeworks\libs\videoInput\include;..\libs\openframeworks\libs\glew\include\;..\libs\openframeworks\libs\glu\include;..\libs\openframeworks\libs\tess2\include;..\libs\openframeworks\libs\cairo\include\cairo;..\libs\openframeworks\libs\poco\include;..\libs\openframeworks\libs\glfw\include;..\libs\openframeworks\libs\openssl\include;..\libs\openframeworks\addons;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\libs\openframeworks\libs\glut\lib\vs;..\libs\openframeworks\libs\glfw\lib\vs;..\libs\openframeworks\libs\rtAudio\lib\vs;..\libs\openframeworks\libs\FreeImage\lib\vs;..\libs\openframeworks\libs\freetype\lib\vs;..\libs\openframeworks\libs\quicktime\lib\vs;..\libs\openframeworks\libs\fmodex\lib\vs;..\libs\openframeworks\libs\videoInput\lib\vs;..\libs\openframeworks\libs\cairo\lib\vs;..\libs\openframeworks\libs\glew\lib\vs;..\libs\openframeworks\libs\glu\lib\vs;..\libs\openframeworks\libs\openssl\lib\vs;..\libs\openframeworks\libs\Poco\lib\vs;..\libs\openframeworks\libs\tess2\lib\vs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;Vfw32.lib;comctl32.lib;glut32.lib;rtAudioD.lib;videoInputD.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;ssleay32MD.lib;libeay32MD.lib;crypt32.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;Ws2_32.lib;tess2.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>PocoFoundationmdd.lib;atlthunk.lib;msvcrt;libcmt;LIBC;LIBCMTD</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\libs\openframeworks\export\vs\*.dll" "$(ProjectDir)bin"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
