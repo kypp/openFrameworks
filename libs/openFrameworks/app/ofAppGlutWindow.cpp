@@ -10,6 +10,7 @@
 #ifdef TARGET_WIN32
 	#define GLUT_BUILDING_LIB
 	#include "glut.h"
+	#include <windowsx.h>
 #endif
 #ifdef TARGET_OSX
     #include <OpenGL/OpenGL.h>
@@ -132,6 +133,18 @@ void HandleFiles(WPARAM wParam)
 }
 
 
+
+void HandleMousewheel(WPARAM wParam, LPARAM lParam)
+{
+	auto fwKeys = GET_KEYSTATE_WPARAM(wParam);
+	auto zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+	auto xPos = GET_X_LPARAM(lParam); 
+	auto yPos = GET_Y_LPARAM(lParam); 
+	ofAppPtr->mouseScrolled(zDelta, fwKeys, xPos, yPos);
+}
+
+
+
 static LRESULT CALLBACK winProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam){
 
    //we catch close and destroy messages
@@ -151,6 +164,9 @@ static LRESULT CALLBACK winProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lPara
             // We pass the wParam because it's the HDROP handle.
             HandleFiles(wParam);
             break;
+	  case WM_MOUSEWHEEL:
+		  HandleMousewheel(wParam, lParam);
+		  break;
       default:
          return CallWindowProc(currentWndProc, handle, Msg, wParam, lParam);
       break;
