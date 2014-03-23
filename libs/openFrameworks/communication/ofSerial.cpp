@@ -212,7 +212,7 @@ void ofSerial::buildDeviceList(){
 	#ifdef TARGET_WIN32
 	//---------------------------------------------
 	enumerateWin32Ports();
-	ofLogNotice("ofSerial") << "found " << nPorts << " devices";
+	//ofLogNotice("ofSerial") << "found " << nPorts << " devices";
 	for (int i = 0; i < nPorts; i++){
 		//NOTE: we give the short port name for both as that is what the user should pass and the short name is more friendly
 		devices.push_back(ofSerialDeviceInfo(string(portNamesShort[i]), string(portNamesShort[i]), i));
