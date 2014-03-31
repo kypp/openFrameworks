@@ -40,6 +40,12 @@
     <Filter Include="libs\openFrameworks\utils">
       <UniqueIdentifier>{e769ef16-c02a-402a-8eff-5d109f5a3a86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\addons">
+      <UniqueIdentifier>{b0f9091e-6eda-4b55-bde9-9e40eeeb92dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\addons\ofxXmlSettings">
+      <UniqueIdentifier>{e412a2fc-ffc5-4fc3-94fc-72e349ce66b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\openFrameworks\ofMain.h">
@@ -267,6 +273,12 @@
     <ClInclude Include="..\..\..\openFrameworks\utils\ofXml.h">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\openFrameworks\app\ofAppGlutWindow.cpp">
@@ -457,6 +469,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\utils\ofXml.cpp">
       <Filter>libs\openFrameworks\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>libs\addons\ofxXmlSettings</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
