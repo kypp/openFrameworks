@@ -16,5 +16,5 @@ class ofFileDialogResult{
 
 void ofSystemAlertDialog(string errorMessage);
 ofFileDialogResult ofSystemLoadDialog(string windowTitle="", bool bFolderSelection = false, string defaultPath="");
-ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName);
+ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName, string defaultPath = "", LPCWSTR formatstring = L"");
 string ofSystemTextBoxDialog(string question, string text="");

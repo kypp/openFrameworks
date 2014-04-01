@@ -392,7 +392,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 
 
 
-ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName){
+ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName, string defaultPath, LPCWSTR formatstring){
 
 	ofFileDialogResult results;
 
@@ -434,10 +434,15 @@ ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName){
 	ofn.hwndOwner = hwnd;
 	ofn.hInstance = GetModuleHandle(0);
 	ofn.nMaxFileTitle = 31;
+	if (defaultPath != "")
+		ofn.lpstrInitialDir = convertNarrowToWide(defaultPath).c_str();
 	ofn.lpstrFile = fileName;
 	ofn.nMaxFile = MAX_PATH;
 	ofn.lpstrFilter = L"All Files (*.*)\0*.*\0";
+	if (formatstring != L"")
+		ofn.lpstrFilter = formatstring;
 	ofn.lpstrDefExt = L"";	// we could do .rxml here?
+
 	ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_HIDEREADONLY;
 	ofn.lpstrTitle = L"Select Output File";
 
