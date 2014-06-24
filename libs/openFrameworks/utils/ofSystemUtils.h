@@ -1,20 +1,21 @@
 #pragma once
-
+#include <wtypes.h>
+#include <string>
 
 class ofFileDialogResult{
 	public:
 		ofFileDialogResult();
 		
 		//TODO: only 1 file for now
-		string getName();
-		string getPath();
+		std::string getName();
+		std::string getPath();
 		
-		string filePath;
-		string fileName;
+		std::string filePath;
+		std::string fileName;
 		bool bSuccess;
 };
 
-void ofSystemAlertDialog(string errorMessage);
-ofFileDialogResult ofSystemLoadDialog(string windowTitle="", bool bFolderSelection = false, string defaultPath="");
-ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName, string defaultPath = "", LPCWSTR formatstring = L"");
-string ofSystemTextBoxDialog(string question, string text="");
+void ofSystemAlertDialog(std::string errorMessage);
+ofFileDialogResult ofSystemLoadDialog(std::string windowTitle="", bool bFolderSelection = false, std::string defaultPath="");
+ofFileDialogResult ofSystemSaveDialog(std::string defaultName, std::string messageName, std::string defaultPath = "", LPCWSTR formatstring = L"");
+std::string ofSystemTextBoxDialog(std::string question, std::string text="");
