@@ -570,14 +570,12 @@ ofMatrix4x4 ofGLProgrammableRenderer::getCurrentMatrix(ofMatrixMode matrixMode_)
 	switch (matrixMode_) {
 		case OF_MATRIX_MODELVIEW:
 			return matrixStack.getModelViewMatrix();
-			break;
 		case OF_MATRIX_PROJECTION:
 			return matrixStack.getProjectionMatrix();
-			break;
 		case OF_MATRIX_TEXTURE:
 			return matrixStack.getTextureMatrix();
-			break;
 	}
+	return matrixStack.getModelViewMatrix();
 }
 
 //----------------------------------------------------------

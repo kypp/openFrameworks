@@ -5,6 +5,7 @@
   <PropertyGroup>
     <_PropertySheetDisplayName>openFrameworksRelease</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)bin\</OutDir>
+    <LibraryPath>C:\Libraries\of_v0.8.0_vs_release\apps\myApps\voxelizer_beta;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

@@ -1,5 +1,4 @@
 #pragma once
-#include <wtypes.h>
 #include <string>
 
 class ofFileDialogResult{
@@ -17,5 +16,5 @@ class ofFileDialogResult{
 
 void ofSystemAlertDialog(std::string errorMessage);
 ofFileDialogResult ofSystemLoadDialog(std::string windowTitle="", bool bFolderSelection = false, std::string defaultPath="");
-ofFileDialogResult ofSystemSaveDialog(std::string defaultName, std::string messageName, std::string defaultPath = "", LPCWSTR formatstring = L"");
+ofFileDialogResult ofSystemSaveDialog(std::string defaultName, std::string messageName, std::string defaultPath = "", const wchar_t * formatstring = L"");
 std::string ofSystemTextBoxDialog(std::string question, std::string text="");
