@@ -923,6 +923,10 @@ void ofAppGLFWWindow::drop_cb(GLFWwindow* windowP_, int numFiles, const char** d
 		drag.files[i] = Poco::URI(dropString[i]).getPath();
 	}
 #endif
+#ifdef TARGET_WIN32
+	for (int i = 0; i < (int)drag.files.size(); i++)
+		drag.files[i] = dropString[i];
+#endif
 	ofNotifyDragEvent(drag);
 }
 
