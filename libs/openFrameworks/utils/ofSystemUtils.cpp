@@ -34,7 +34,7 @@
 #include <string>
 
 std::string convertWideToNarrow( const wchar_t *s, char dfault = '?',
-                      const std::locale& loc = std::locale() )
+                      const std::locale& loc = std::locale("") )
 {
   std::ostringstream stm;
 

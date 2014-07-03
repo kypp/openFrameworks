@@ -10,6 +10,9 @@
 #include "Poco/URI.h"
 
 #include <cctype> // for toupper
+#include <vector>
+#include <locale>
+#include <codecvt>
 
 
 
@@ -665,6 +668,24 @@ string ofVAArgsToString(const char * format, va_list args){
 	}
 	return retStr;
 }
+
+
+std::string ofConvertToLocalUTF8(std::string s)
+{
+	//to wstring part
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv1;
+	std::wstring res = conv1.from_bytes(s);
+
+	//reverse
+	std::locale const loc("");
+	wchar_t const* from = res.c_str();
+	std::size_t const len = res.size();
+	std::vector<char> buffer(len + 1);
+	std::use_facet<std::ctype<wchar_t> >(loc).narrow(from, from + len, '_', &buffer[0]);
+	return std::string(&buffer[0], &buffer[len]);
+}
+
+
 
 //--------------------------------------------------
 void ofLaunchBrowser(const string& _url, bool uriEncodeQuery){

@@ -429,4 +429,4 @@ string ofSystem(const string& command);
 
 ofTargetPlatform ofGetTargetPlatform();
 
-
+std::string ofConvertToLocalUTF8(std::string s);
