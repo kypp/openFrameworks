@@ -1048,11 +1048,10 @@ void ofAppGLFWWindow::keyboard_cb(GLFWwindow* windowP_, int keycode, int scancod
 			key = codepoint;
 			break;
 	}
-
 	if(action == GLFW_PRESS || action == GLFW_REPEAT){
-		ofNotifyKeyPressed(key,keycode,scancode,codepoint);
+		ofNotifyKeyPressed(key, keycode, scancode, codepoint, mods);
 	}else if (action == GLFW_RELEASE){
-		ofNotifyKeyReleased(key,keycode,scancode,codepoint);
+		ofNotifyKeyReleased(key, keycode, scancode, codepoint, mods);
 	}
 }
 

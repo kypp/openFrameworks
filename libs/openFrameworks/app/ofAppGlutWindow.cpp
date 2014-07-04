@@ -94,7 +94,7 @@ void HandleFiles(WPARAM wParam)
 
 		wchar_t * s =  (wchar_t*)szName;
 		char dfault = '?';
-        const std::locale& loc = std::locale();
+        const std::locale& loc = std::locale("");
 		std::ostringstream stm;
 		while( *s != L'\0' ) {
 			stm << std::use_facet< std::ctype<wchar_t> >( loc ).narrow( *s++, dfault );

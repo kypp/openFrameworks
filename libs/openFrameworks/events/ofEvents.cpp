@@ -178,10 +178,11 @@ void ofNotifyDraw(){
 }
 
 //------------------------------------------
-void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint){
+void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint, int mod){
 	static ofKeyEventArgs keyEventArgs;
 	// FIXME: modifiers are being reported twice, for generic and for left/right
 	// add operators to the arguments class so it can be checked for both
+	keyEventArgs.mod = 0;
     if(key == OF_KEY_RIGHT_CONTROL || key == OF_KEY_LEFT_CONTROL){
         pressedKeys.insert(OF_KEY_CONTROL);
     	keyEventArgs.key = OF_KEY_CONTROL;
@@ -209,6 +210,7 @@ void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint){
 	keyEventArgs.keycode = keycode;
 	keyEventArgs.scancode = scancode;
 	keyEventArgs.codepoint = codepoint;
+	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyPressed, keyEventArgs );
 	
 	
@@ -220,7 +222,7 @@ void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint){
 }
 
 //------------------------------------------
-void ofNotifyKeyReleased(int key, int keycode, int scancode, int codepoint){
+void ofNotifyKeyReleased(int key, int keycode, int scancode, int codepoint, int mod){
 	static ofKeyEventArgs keyEventArgs;
 
 	// FIXME: modifiers are being reported twice, for generic and for left/right
@@ -252,6 +254,7 @@ void ofNotifyKeyReleased(int key, int keycode, int scancode, int codepoint){
 	keyEventArgs.keycode = keycode;
 	keyEventArgs.scancode = scancode;
 	keyEventArgs.codepoint = codepoint;
+	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyReleased, keyEventArgs );
 }
 

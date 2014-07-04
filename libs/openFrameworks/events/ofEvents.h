@@ -44,6 +44,7 @@ class ofKeyEventArgs : public ofEventArgs {
 	int key;
 	int keycode;
 	int scancode;
+	int mod;
 	unsigned int codepoint;
 };
 
@@ -252,8 +253,8 @@ void ofNotifySetup();
 void ofNotifyUpdate();
 void ofNotifyDraw();
 
-void ofNotifyKeyPressed(int key, int keycode=-1, int scancode=-1, int codepoint=-1);
-void ofNotifyKeyReleased(int key, int keycode=-1, int scancode=-1, int codepoint=-1);
+void ofNotifyKeyPressed(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
+void ofNotifyKeyReleased(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
 void ofNotifyKeyEvent(const ofKeyEventArgs & keyEvent);
 
 void ofNotifyMousePressed(int x, int y, int button);
