@@ -15,6 +15,6 @@ class ofFileDialogResult{
 };
 
 void ofSystemAlertDialog(std::string errorMessage);
-ofFileDialogResult ofSystemLoadDialog(std::string windowTitle="", bool bFolderSelection = false, std::string defaultPath="");
+ofFileDialogResult ofSystemLoadDialog(std::string windowTitle = "", bool bFolderSelection = false, std::string defaultPath = "", const wchar_t * formatstring = L"All\0");
 ofFileDialogResult ofSystemSaveDialog(std::string defaultName, std::string messageName, std::string defaultPath = "", const wchar_t * formatstring = L"");
 std::string ofSystemTextBoxDialog(std::string question, std::string text="");

@@ -313,7 +313,7 @@ static int CALLBACK loadDialogBrowseCallback(
 //---------------------------------------------------------------------
 
 // OS specific results here.  "" = cancel or something bad like can't load, can't save, etc...
-ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection, string defaultPath){
+ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection, string defaultPath, const wchar_t * formatstring){
 
 	ofFileDialogResult results;
 
@@ -368,6 +368,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lStructSize = sizeof(ofn);
 		HWND hwnd = WindowFromDC(wglGetCurrentDC());
 		ofn.hwndOwner = hwnd;
+		ofn.lpstrFilter = formatstring;
 #ifdef __MINGW32_VERSION
 		char szFileName[MAX_PATH];
         memset(szFileName,0,260);
@@ -375,7 +376,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
             strcpy(szFileName,ofToDataPath(defaultPath).c_str());
 		}
 
-		ofn.lpstrFilter = "All\0";
+		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #else // Visual Studio
 		wchar_t szFileName[MAX_PATH];
@@ -394,7 +395,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 			ofn.lpstrTitle = NULL;
 		}
 
-		ofn.lpstrFilter = L"All\0";
+		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #endif
 		ofn.nMaxFile = MAX_PATH;
@@ -484,7 +485,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 
 
 
-ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName, string defaultPath, LPCWSTR formatstring){
+ofFileDialogResult ofSystemSaveDialog(string defaultName, string messageName, string defaultPath, const wchar_t * formatstring){
 
 	ofFileDialogResult results;
 
