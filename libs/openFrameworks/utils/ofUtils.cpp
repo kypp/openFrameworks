@@ -12,8 +12,10 @@
 #include <cctype> // for toupper
 #include <vector>
 #include <locale>
-#include <codecvt>
 
+#ifdef TARGET_WIN32
+#include <codecvt>
+#endif
 
 
 #ifdef TARGET_WIN32
@@ -672,6 +674,7 @@ string ofVAArgsToString(const char * format, va_list args){
 
 std::string ofConvertToLocalUTF8(std::string s)
 {
+#ifdef TARGET_WIN32
 	//to wstring part
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv1;
 	std::wstring res = conv1.from_bytes(s);
@@ -683,6 +686,10 @@ std::string ofConvertToLocalUTF8(std::string s)
 	std::vector<char> buffer(len + 1);
 	std::use_facet<std::ctype<wchar_t> >(loc).narrow(from, from + len, '_', &buffer[0]);
 	return std::string(&buffer[0], &buffer[len]);
+#else
+	return s;
+#endif
+
 }
 
 
