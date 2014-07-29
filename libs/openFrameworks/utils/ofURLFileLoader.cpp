@@ -35,11 +35,11 @@ ofURLFileLoader::ofURLFileLoader() {
 	if(!factoryLoaded){
 		try {
 			HTTPStreamFactory::registerFactory();
-			HTTPSStreamFactory::registerFactory();
-			SharedPtr<PrivateKeyPassphraseHandler> pConsoleHandler = new KeyConsoleHandler(false);
-			SharedPtr<InvalidCertificateHandler> pInvalidCertHandler = new ConsoleCertificateHandler(true);
-			Context::Ptr pContext = new Context(Context::CLIENT_USE, "", Context::VERIFY_NONE);
-			SSLManager::instance().initializeClient(pConsoleHandler, pInvalidCertHandler, pContext);
+			// HTTPSStreamFactory::registerFactory();
+			// SharedPtr<PrivateKeyPassphraseHandler> pConsoleHandler = new KeyConsoleHandler(false);
+			// SharedPtr<InvalidCertificateHandler> pInvalidCertHandler = new ConsoleCertificateHandler(true);
+			// Context::Ptr pContext = new Context(Context::CLIENT_USE, "", Context::VERIFY_NONE);
+			// SSLManager::instance().initializeClient(pConsoleHandler, pInvalidCertHandler, pContext);
 			factoryLoaded = true;
 		}
 		catch (Poco::SystemException & PS) {
@@ -164,12 +164,12 @@ ofHttpResponse ofURLFileLoader::handleRequest(ofHttpRequest request) {
 		ofPtr<HTTPSession> session;
 		istream * rs;
 		if(uri.getScheme()=="https"){
-			 //const Poco::Net::Context::Ptr context( new Poco::Net::Context( Poco::Net::Context::CLIENT_USE, "", "", "rootcert.pem" ) );
-			HTTPSClientSession * httpsSession = new HTTPSClientSession(uri.getHost(), uri.getPort());//,context);
-			httpsSession->setTimeout(Poco::Timespan(20,0));
-			httpsSession->sendRequest(req);
-			rs = &httpsSession->receiveResponse(res);
-			session = ofPtr<HTTPSession>(httpsSession);
+			// const Poco::Net::Context::Ptr context( new Poco::Net::Context( Poco::Net::Context::CLIENT_USE, "", "", "rootcert.pem" ) );
+			// HTTPSClientSession * httpsSession = new HTTPSClientSession(uri.getHost(), uri.getPort());//,context);
+			// httpsSession->setTimeout(Poco::Timespan(20,0));
+			// httpsSession->sendRequest(req);
+			// rs = &httpsSession->receiveResponse(res);
+			// session = ofPtr<HTTPSession>(httpsSession);
 		}else{
 			HTTPClientSession * httpSession = new HTTPClientSession(uri.getHost(), uri.getPort());
 			httpSession->setTimeout(Poco::Timespan(20,0));
@@ -262,6 +262,6 @@ void ofURLFileLoaderShutdown(){
 	if(initialized){
 		ofRemoveAllURLRequests();
 		ofStopURLLoader();
-		Poco::Net::uninitializeSSL();
+		// Poco::Net::uninitializeSSL();
 	}
 }
