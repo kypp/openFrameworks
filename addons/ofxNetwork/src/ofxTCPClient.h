@@ -86,7 +86,9 @@ class ofxTCPClient{
 		//--------------------------
 		bool setup(int _index, bool blocking);
 
-
+		ofxTCPManager & manager() {
+			return TCPClient;
+		}
 
 private:
 		// private copy so this can't be copied to avoid problems with destruction
