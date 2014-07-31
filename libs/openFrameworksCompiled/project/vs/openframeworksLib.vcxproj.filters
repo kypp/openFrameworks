@@ -46,6 +46,9 @@
     <Filter Include="libs\addons\ofxXmlSettings">
       <UniqueIdentifier>{e412a2fc-ffc5-4fc3-94fc-72e349ce66b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\addons\ofxNetwork">
+      <UniqueIdentifier>{65573adf-6589-486c-be39-ad4460ad8647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\openFrameworks\ofMain.h">
@@ -279,6 +282,24 @@
     <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>libs\addons\ofxXmlSettings</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxNetwork.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPClient.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPManager.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPServer.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\openFrameworks\app\ofAppGlutWindow.cpp">
@@ -481,6 +502,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>libs\addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>libs\addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>libs\addons\ofxNetwork</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
