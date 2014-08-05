@@ -51,6 +51,7 @@ public:
 	void setupScreenPerspective(float width = -1, float height = -1, float fov = 60, float nearDist = 0, float farDist = 0);
 	void setupScreenOrtho(float width = -1, float height = -1, float nearDist = -1, float farDist = 1);
 	ofRectangle getCurrentViewport();
+	virtual void setNativeViewport(float x, float y, float width, float height);
 	ofRectangle getNativeViewport();
 	int getViewportWidth();
 	int getViewportHeight();
@@ -140,7 +141,6 @@ public:
 private:
 	void startSmoothing();
 	void endSmoothing();
-
 
 	bool bBackgroundAuto;
 	ofFloatColor bgColor;

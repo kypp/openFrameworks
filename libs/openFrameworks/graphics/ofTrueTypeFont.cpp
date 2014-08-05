@@ -1120,10 +1120,10 @@ void ofTrueTypeFont::bind(){
 	    // **************
 		// (a) record the current "alpha state, blend func, etc"
 
-		blend_enabled = glIsEnabled(GL_BLEND);
-		texture_2d_enabled = glIsEnabled(GL_TEXTURE_2D);
-		glGetIntegerv( GL_BLEND_SRC, &blend_src );
-		glGetIntegerv( GL_BLEND_DST, &blend_dst );
+		//blend_enabled = glIsEnabled(GL_BLEND);
+		//texture_2d_enabled = glIsEnabled(GL_TEXTURE_2D);
+		//glGetIntegerv( GL_BLEND_SRC, &blend_src );
+		//glGetIntegerv( GL_BLEND_DST, &blend_dst );
 
 	    // (b) enable our regular ALPHA blending!
 	    glEnable(GL_BLEND);
@@ -1141,11 +1141,11 @@ void ofTrueTypeFont::unbind(){
 		stringQuads.drawFaces();
 		texAtlas.unbind();
 
-		if( !blend_enabled )
-			glDisable(GL_BLEND);
-		if( !texture_2d_enabled )
-			glDisable(GL_TEXTURE_2D);
-		glBlendFunc( blend_src, blend_dst );
+		//if( !blend_enabled )
+		//	glDisable(GL_BLEND);
+		//if( !texture_2d_enabled )
+		//	glDisable(GL_TEXTURE_2D);
+		//glBlendFunc( blend_src, blend_dst );
 
 		binded = false;
 	}

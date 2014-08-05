@@ -301,7 +301,7 @@ void ofGLRenderer::viewport(float x, float y, float width, float height, bool vf
 
 //----------------------------------------------------------
 ofRectangle ofGLRenderer::getCurrentViewport(){
-	getNativeViewport();
+	//getNativeViewport();
 	return matrixStack.getCurrentViewport();
 }
 
@@ -317,12 +317,12 @@ ofRectangle ofGLRenderer::getNativeViewport(){
 
 //----------------------------------------------------------
 int ofGLRenderer::getViewportWidth(){
-	return getCurrentViewport().width;
+	return matrixStack.getCurrentViewport().width;
 }
 
 //----------------------------------------------------------
 int ofGLRenderer::getViewportHeight(){
-	return getCurrentViewport().height;
+	return matrixStack.getCurrentViewport().height;
 }
 
 //----------------------------------------------------------
@@ -354,7 +354,7 @@ bool ofGLRenderer::texturesNeedVFlip() const{
 void ofGLRenderer::setupScreenPerspective(float width, float height, float fov, float nearDist, float farDist) {
 	float viewW, viewH;
 	if(width<0 || height<0){
-		ofRectangle currentViewport = getCurrentViewport();
+		ofRectangle currentViewport = matrixStack.getCurrentViewport();
 
 		viewW = currentViewport.width;
 		viewH = currentViewport.height;
@@ -375,13 +375,15 @@ void ofGLRenderer::setupScreenPerspective(float width, float height, float fov, 
 
 
 	matrixMode(OF_MATRIX_PROJECTION);
+	//loadIdentityMatrix();
 	ofMatrix4x4 persp;
 	persp.makePerspectiveMatrix(fov, aspect, nearDist, farDist);
-	loadMatrix( persp );
+	loadMatrix(persp);
 
 	matrixMode(OF_MATRIX_MODELVIEW);
+	//loadIdentityMatrix();
 	ofMatrix4x4 lookAt;
-	lookAt.makeLookAtViewMatrix( ofVec3f(eyeX, eyeY, dist),  ofVec3f(eyeX, eyeY, 0),  ofVec3f(0, 1, 0) );
+	lookAt.makeLookAtViewMatrix(ofVec3f(eyeX, eyeY, dist), ofVec3f(eyeX, eyeY, 0), ofVec3f(0, 1, 0));
 	loadMatrix(lookAt);
 }
 
@@ -1141,4 +1143,9 @@ void ofGLRenderer::enableTextureTarget(int textureTarget){
 
 void ofGLRenderer::disableTextureTarget(int textureTarget){
 	glDisable(textureTarget);
+}
+
+void ofGLRenderer::setNativeViewport(float x, float y, float width, float height)
+{
+	matrixStack.nativeViewport(ofRectangle( x, y, width, height ));
 }
