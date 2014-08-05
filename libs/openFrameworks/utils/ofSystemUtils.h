@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 class ofFileDialogResult{
 	public:
@@ -11,7 +12,11 @@ class ofFileDialogResult{
 		
 		std::string filePath;
 		std::string fileName;
+
+		std::vector<std::string> filePaths;
+		std::vector<std::string> fileNames;
 		bool bSuccess;
+		bool multiple() { return filePaths.size() > 0; }
 };
 
 void ofSystemAlertDialog(std::string errorMessage);

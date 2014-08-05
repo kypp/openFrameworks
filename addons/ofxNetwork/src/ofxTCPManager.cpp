@@ -28,6 +28,7 @@ ofxTCPManager::ofxTCPManager()
   m_hSocket= INVALID_SOCKET;
   m_dwTimeoutSend= OF_TCP_DEFAULT_TIMEOUT;
   m_dwTimeoutReceive= OF_TCP_DEFAULT_TIMEOUT;
+  m_dwTimeoutReceiveUsec = 0;
   m_dwTimeoutAccept= OF_TCP_DEFAULT_TIMEOUT;
   m_iListenPort= -1;
   m_closing = false;
@@ -299,7 +300,7 @@ int ofxTCPManager::Receive(char* pBuff, const int iSize)
   		fd_set fd;
   		FD_ZERO(&fd);
   		FD_SET(m_hSocket, &fd);
-  		timeval	tv=	{m_dwTimeoutSend, 0};
+		timeval	tv = { m_dwTimeoutReceive, m_dwTimeoutReceiveUsec };
   		if(select(m_hSocket+1,&fd,NULL,NULL,&tv)== 0)
   		{
   			return(SOCKET_TIMEOUT);
@@ -326,7 +327,7 @@ int ofxTCPManager::ReceiveAll(char* pBuff, const int iSize)
 		fd_set fd;
 		FD_ZERO(&fd);
 		FD_SET(m_hSocket, &fd);
-		timeval	tv=	{m_dwTimeoutSend, 0};
+		timeval	tv = { m_dwTimeoutSend, m_dwTimeoutReceiveUsec };
 		if(select(m_hSocket+1,&fd,NULL,NULL,&tv)== 0)
 		{
 			return(SOCKET_TIMEOUT);
@@ -409,6 +410,9 @@ void ofxTCPManager::SetTimeoutSend(int timeoutInSeconds) {
 void ofxTCPManager::SetTimeoutReceive(int timeoutInSeconds) {
 	m_dwTimeoutReceive= timeoutInSeconds;
 }
+void ofxTCPManager::SetTimeoutReceiveUsec(int timeoutInUseconds) {
+	m_dwTimeoutReceiveUsec = timeoutInUseconds;
+}
 void ofxTCPManager::SetTimeoutAccept(int timeoutInSeconds) {
 	m_dwTimeoutAccept= timeoutInSeconds;
 }
@@ -474,6 +478,22 @@ bool ofxTCPManager::SetSendBufferSize(int sizeInByte) {
 		ofxNetworkCheckError();
 		return false;
 	}
+}
+
+bool ofxTCPManager::SetNoDelay(bool no_delay)
+{
+	if (m_hSocket == INVALID_SOCKET) return false;
+
+	int value = ((no_delay) ? 1 : 0);
+	if (setsockopt(m_hSocket, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<const char*>(&value), sizeof(int)) == 0){
+		return true;
+	}
+	else
+	{
+		ofxNetworkCheckError();
+		return false;
+	}
+		
 }
 
 int ofxTCPManager::GetMaxConnections() {

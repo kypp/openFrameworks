@@ -33,15 +33,15 @@
 #include <sstream>
 #include <string>
 
-std::string convertWideToNarrow( const wchar_t *s, char dfault = '?',
-                      const std::locale& loc = std::locale("") )
+std::string convertWideToNarrow(const wchar_t *s, char dfault = '?',
+	const std::locale& loc = std::locale(""))
 {
-  std::ostringstream stm;
+	std::ostringstream stm;
 
-  while( *s != L'\0' ) {
-    stm << std::use_facet< std::ctype<wchar_t> >( loc ).narrow( *s++, dfault );
-  }
-  return stm.str();
+	while(*s != L'\0') {
+		stm << std::use_facet< std::ctype<wchar_t> >(loc).narrow(*s++, dfault);
+	}
+	return stm.str();
 }
 
 std::wstring convertNarrowToWide( const std::string& as ){
@@ -379,7 +379,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #else // Visual Studio
-		wchar_t szFileName[MAX_PATH];
+		wchar_t szFileName[1000];
 		wchar_t szTitle[MAX_PATH];
 		if(defaultPath!=""){
 			wcscpy_s(szFileName,convertNarrowToWide(ofToDataPath(defaultPath)).c_str());
@@ -398,8 +398,8 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #endif
-		ofn.nMaxFile = MAX_PATH;
-		ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+		ofn.nMaxFile = 1000;
+		ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_ALLOWMULTISELECT;
 		ofn.lpstrDefExt = 0;
         
 #ifdef __MINGW32_VERSION
@@ -410,9 +410,36 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 
 		if(GetOpenFileName(&ofn)) {
 #ifdef __MINGW32_VERSION
-			results.filePath = string(szFileName);
+			int size = 1000;
+			while (szFileName[--size] == '\0'); size++;
+			for (int i = 0; i < size; i++) if (szFileName[i] == '\0')  szFileName[i] = '\n';
+			auto file_names = string(szFileName);
+			bool multiple = file_names.find_first_of("\n") != string::npos;
+			if (!multiple){ //one file
+				results.filePath = file_names;
+			}
+			else{ //multipe files
+				auto files = ofSplitString(convertWideToNarrow(szFileName), "\n", true, true);
+				for (int i = 1; i < files.size(); i++)
+					results.filePaths.push_back(files[0] + "\\" + files[i]);
+				results.filePath = results.filePaths[0];
+			}
 #else
-			results.filePath = convertWideToNarrow(szFileName);
+			int size = 1000;
+			while (szFileName[--size] == '\0'); size++;
+			for (int i = 0; i < size; i++) if (szFileName[i] == '\0')  szFileName[i] = L'\n';
+			auto file_names = convertWideToNarrow(szFileName);
+			bool multiple = file_names.find_first_of("\n") != string::npos;
+			if (!multiple){ //one file
+				results.filePath = file_names;
+			}
+			else{ //multipe files
+				auto files = ofSplitString(convertWideToNarrow(szFileName), "\n", true, true);
+				for (int i = 1; i < files.size(); i++)
+					results.filePaths.push_back(files[0] + "\\" + files[i]);
+				results.filePath = results.filePaths[0];
+			}
+			
 #endif
 
 		}
@@ -479,6 +506,8 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		results.bSuccess = true;
 		results.fileName = ofFilePath::getFileName(results.filePath);
 	}
+	for (int i = 0; i < results.filePaths.size(); i++)
+		results.fileNames.push_back(ofFilePath::getFileName(results.filePaths[i]));
 
 	return results;
 }

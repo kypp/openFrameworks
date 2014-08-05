@@ -189,7 +189,9 @@ public:
 	bool GetInetAddr(LPINETADDR pInetAddr);
 	void SetTimeoutSend(int timeoutInSeconds);
 	void SetTimeoutReceive(int timeoutInSeconds);
+	void SetTimeoutReceiveUsec(int timeoutInUseconds);
 	void SetTimeoutAccept(int timeoutInSeconds);
+	bool SetNoDelay(bool no_delat);
 	int  GetTimeoutSend();
 	int  GetTimeoutReceive();
 	int  GetTimeoutAccept();
@@ -218,6 +220,7 @@ private:
 
   unsigned long m_dwTimeoutSend;
   unsigned long m_dwTimeoutReceive;
+  unsigned long m_dwTimeoutReceiveUsec;
   unsigned long m_dwTimeoutAccept;
   bool nonBlocking;
   static bool m_bWinsockInit;
