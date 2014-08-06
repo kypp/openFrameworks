@@ -105,6 +105,30 @@ float ofMap(float value, float inputMin, float inputMax, float outputMin, float 
 
 }
 
+double ofMap(double value, double inputMin, double inputMax, double outputMin, double outputMax, bool clamp) {
+
+	if (fabs(inputMin - inputMax) < FLT_EPSILON){
+		ofLogWarning("ofMath") << "ofMap(): avoiding possible divide by zero, check inputMin and inputMax: " << inputMin << " " << inputMax;
+		return outputMin;
+	}
+	else {
+		double outVal = ((value - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin);
+
+		if (clamp){
+			if (outputMax < outputMin){
+				if (outVal < outputMax)outVal = outputMax;
+				else if (outVal > outputMin)outVal = outputMin;
+			}
+			else{
+				if (outVal > outputMax)outVal = outputMax;
+				else if (outVal < outputMin)outVal = outputMin;
+			}
+		}
+		return outVal;
+	}
+
+}
+
 //--------------------------------------------------
 float ofDist(float x1, float y1, float x2, float y2) {
 	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
