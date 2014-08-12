@@ -316,6 +316,7 @@ static int CALLBACK loadDialogBrowseCallback(
 ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection, string defaultPath, const wchar_t * formatstring){
 
 	ofFileDialogResult results;
+	int buffer_size = 1024 * 1024;
 
 	//----------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------       OSX
@@ -379,10 +380,11 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #else // Visual Studio
-		wchar_t szFileName[1000];
+
+		wchar_t* szFileName = new wchar_t[buffer_size];
 		wchar_t szTitle[MAX_PATH];
 		if(defaultPath!=""){
-			wcscpy_s(szFileName,convertNarrowToWide(ofToDataPath(defaultPath)).c_str());
+			wcscpy_s(szFileName, buffer_size, convertNarrowToWide(ofToDataPath(defaultPath)).c_str());
 		}else{
 		    //szFileName = L"";
 			memset(szFileName,  0, sizeof(szFileName));
@@ -398,7 +400,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #endif
-		ofn.nMaxFile = 1000;
+		ofn.nMaxFile = buffer_size;
 		ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_ALLOWMULTISELECT;
 		ofn.lpstrDefExt = 0;
         
@@ -425,7 +427,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 				results.filePath = results.filePaths[0];
 			}
 #else
-			int size = 1000;
+			int size = buffer_size;
 			while (szFileName[--size] == '\0'); size++;
 			for (int i = 0; i < size; i++) if (szFileName[i] == '\0')  szFileName[i] = L'\n';
 			auto file_names = convertWideToNarrow(szFileName);
@@ -443,6 +445,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 #endif
 
 		}
+		delete[] szFileName;
 
 	} else {
 
