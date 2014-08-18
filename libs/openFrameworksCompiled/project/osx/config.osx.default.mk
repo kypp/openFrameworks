@@ -70,7 +70,7 @@ PLATFORM_REQUIRED_ADDONS =
 ##########################################################################################
 
 # Link against libstdc++ to silence tr1/memory errors on latest versions of osx
-PLATFORM_CFLAGS = -stdlib=libstdc++
+PLATFORM_CFLAGS = -stdlib=libc++ -std=c++1y -Wno-c++11-narrowing
 
 # Warning Flags (http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html)
 PLATFORM_CFLAGS += -Wall

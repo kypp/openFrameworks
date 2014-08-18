@@ -443,7 +443,8 @@ static bool loadFontFace(string fontname, int _fontSize, FT_Face & face, string 
 		}else if(fontname==OF_TTF_MONO){
 			fontname = "Menlo Regular";
 		}
-		filename = osxFontPathByName(fontname);
+		// filename = osxFontPathByName(fontname);
+		filename = fontname; //dirty hot-fix till enchanced font handling happen
 #elif defined(TARGET_WIN32)
 		if(fontname==OF_TTF_SANS){
 			fontname = "Arial";

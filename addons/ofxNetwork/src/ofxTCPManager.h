@@ -58,6 +58,7 @@ SetTimeoutReceive()
 	#include <errno.h>
 	#include <unistd.h>
 	#include <netinet/in.h>
+	#include <netinet/tcp.h>
 	#include <arpa/inet.h>
 	#include <sys/timeb.h>
 	#include <sys/types.h>
