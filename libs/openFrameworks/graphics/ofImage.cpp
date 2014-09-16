@@ -204,7 +204,11 @@ static bool loadImage(ofPixels_<PixelType> & pix, string fileName){
 		return ofLoadImage(pix, ofLoadURL(fileName).data);
 	}
 	
+#ifdef _WIN32
 	fileName = ofToDataPath(fileName);
+#else
+	fileName = "data/" + fileName;
+#endif
 	bool bLoaded = false;
 	FIBITMAP * bmp = NULL;
 
