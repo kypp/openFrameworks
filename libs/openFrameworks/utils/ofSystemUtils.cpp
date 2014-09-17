@@ -5,6 +5,8 @@
 #include "ofLog.h"
 #include "ofUtils.h"
 #include "ofAppRunner.h"
+#include <mutex>
+#include <condition_variable>
 
 #ifdef TARGET_WIN32
 #include <winuser.h>
@@ -102,8 +104,8 @@ struct FileDialogData{
 	string defaultName;
 	string results;
 	bool done;
-	Poco::Condition condition;
-	ofMutex mutex;
+	std::condition_variable condition;
+	std::mutex mutex;
 };
 
 gboolean file_dialog_gtk(gpointer userdata){
@@ -139,10 +141,9 @@ gboolean file_dialog_gtk(gpointer userdata){
 		gtk_widget_destroy (dialog);
 	}
 
-	dialogData->mutex.lock();
-	dialogData->condition.signal();
+	std::unique_lock<std::mutex> lck(dialogData->mutex);
+	dialogData->condition.notify_one();
 	dialogData->done = true;
-	dialogData->mutex.unlock();
 	return FALSE;
 }
 
@@ -191,7 +192,7 @@ gboolean text_dialog_gtk(gpointer userdata){
 static void initGTK(){
 	static bool initialized = false;
 	if(!initialized){
-		#if !defined(TARGET_RASPBERRY_PI) 
+		#if !defined(TARGET_RASPBERRY_PI)
 		XInitThreads();
 		#endif
 		int argc=0; char **argv = NULL;
@@ -199,7 +200,6 @@ static void initGTK(){
 		ofGstUtils::startGstMainLoop();
 		initialized = true;
 	}
-
 }
 
 static string gtkFileDialog(GtkFileChooserAction action,string windowTitle,string defaultName=""){
@@ -212,8 +212,8 @@ static string gtkFileDialog(GtkFileChooserAction action,string windowTitle,strin
 
 	g_main_context_invoke(g_main_loop_get_context(ofGstUtils::getGstMainLoop()), &file_dialog_gtk, &dialogData);
 	if(!dialogData.done){
-		dialogData.mutex.lock();
-		dialogData.condition.wait(dialogData.mutex);
+		std::unique_lock<std::mutex> lck(dialogData.mutex);
+		dialogData.condition.wait(lck);
 	}
 	return dialogData.results;
 }
@@ -403,12 +403,12 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.nMaxFile = buffer_size;
 		ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_ALLOWMULTISELECT;
 		ofn.lpstrDefExt = 0;
-        
+
 #ifdef __MINGW32_VERSION
 		ofn.lpstrTitle = windowTitle.c_str();
 #else
 		ofn.lpstrTitle = windowTitleW.c_str();
-#endif 
+#endif
 
 		if(GetOpenFileName(&ofn)) {
 #ifdef __MINGW32_VERSION
@@ -441,7 +441,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 					results.filePaths.push_back(files[0] + "\\" + files[i]);
 				results.filePath = results.filePaths[0];
 			}
-			
+
 #endif
 
 		}
