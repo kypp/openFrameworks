@@ -300,9 +300,6 @@
     <ClInclude Include="..\..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
       <Filter>libs\addons\ofxNetwork</Filter>
     </ClInclude>
-    <ClInclude Include="ofVec2d.h">
-      <Filter>libs\openFrameworks\math</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\openFrameworks\app\ofAppGlutWindow.cpp">

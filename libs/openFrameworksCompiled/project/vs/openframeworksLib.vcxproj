@@ -218,7 +218,6 @@
     <ClInclude Include="..\..\..\openFrameworks\communication\ofSerial.h" />
     <ClInclude Include="..\..\..\openFrameworks\events\ofEvents.h" />
     <ClInclude Include="..\..\..\openFrameworks\events\ofEventUtils.h" />
-    <ClInclude Include="ofVec2d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp" />

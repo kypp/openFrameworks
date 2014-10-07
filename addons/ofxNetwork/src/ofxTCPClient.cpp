@@ -295,6 +295,8 @@ int ofxTCPClient::receiveRawBytes(char * receiveBuffer, int numBytes){
 //--------------------------
 string ofxTCPClient::receiveRaw(){
 	messageSize = TCPClient.Receive(tmpBuff, TCP_MAX_MSG_SIZE);
+	if (messageSize == SOCKET_TIMEOUT)
+		return "";
 	if(messageSize==0){
 		close();
 	}else if(messageSize<TCP_MAX_MSG_SIZE) {
