@@ -203,7 +203,7 @@ void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint, int m
     	keyEventArgs.key = OF_KEY_SUPER;
         ofNotifyEvent( ofEvents().keyPressed, keyEventArgs );
     }
-            
+
 	pressedKeys.insert(key);
 
 	keyEventArgs.key = key;
@@ -212,13 +212,13 @@ void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint, int m
 	keyEventArgs.codepoint = codepoint;
 	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyPressed, keyEventArgs );
-	
-	
+
+
 	if (key == OF_KEY_ESC && bEscQuits == true){				// "escape"
 		ofGetWindowPtr()->windowShouldClose();
     }
-	
-	
+
+
 }
 
 //------------------------------------------
@@ -247,15 +247,47 @@ void ofNotifyKeyReleased(int key, int keycode, int scancode, int codepoint, int 
     	keyEventArgs.key = OF_KEY_SUPER;
     	ofNotifyEvent( ofEvents().keyReleased, keyEventArgs );
     }
-    
+
 	pressedKeys.erase(key);
-	
+
 	keyEventArgs.key = key;
 	keyEventArgs.keycode = keycode;
 	keyEventArgs.scancode = scancode;
 	keyEventArgs.codepoint = codepoint;
 	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyReleased, keyEventArgs );
+}
+
+//------------------------------------------
+void ofNotifyKeyPressedGLFW(int keycode, int scancode, int codepoint, int action, int mod)
+{
+	static ofKeyEventArgs keyEventArgs;
+	pressedKeys.insert(keycode);
+
+	keyEventArgs.key = keycode; // deprecated
+	keyEventArgs.keycode = keycode;
+	keyEventArgs.scancode = scancode;
+	keyEventArgs.type = (ofKeyEventArgs::Type)action;
+	keyEventArgs.mod = mod;
+	keyEventArgs.codepoint = codepoint;
+	ofNotifyEvent(ofEvents().keyPressed, keyEventArgs);
+	if (keycode == 256 && bEscQuits == true) // "escape"
+		ofGetWindowPtr()->windowShouldClose();
+}
+
+//------------------------------------------
+void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int codepoint, int action, int mod)
+{
+	static ofKeyEventArgs keyEventArgs;
+	pressedKeys.erase(keycode);
+
+	keyEventArgs.key = keycode; // deprecated
+	keyEventArgs.keycode = keycode;
+	keyEventArgs.scancode = scancode;
+	keyEventArgs.type = (ofKeyEventArgs::Type)action;
+	keyEventArgs.mod = mod;
+	keyEventArgs.codepoint = codepoint;
+	ofNotifyEvent(ofEvents().keyReleased, keyEventArgs);
 }
 
 
@@ -268,7 +300,7 @@ void ofNotifyKeyEvent(const ofKeyEventArgs & keyEvent){
 		case ofKeyEventArgs::Released:
 			ofNotifyKeyReleased(keyEvent.key);
 			break;
-		
+
 	}
 }
 
@@ -287,7 +319,7 @@ void ofNotifyMouseEvent(const ofMouseEventArgs & mouseEvent){
 		case ofMouseEventArgs::Released:
 			ofNotifyMouseReleased(mouseEvent.x,mouseEvent.y,mouseEvent.button);
 			break;
-		
+
 	}
 }
 
@@ -302,7 +334,7 @@ void ofNotifyMousePressed(int x, int y, int button){
 		previousMouseX = currentMouseX;
 		previousMouseY = currentMouseY;
 	}
-    
+
 	currentMouseX = x;
 	currentMouseY = y;
 	pressedMouseButtons.insert(button);
@@ -391,7 +423,7 @@ void ofNotifyExit(){
 //------------------------------------------
 void ofNotifyWindowResized(int width, int height){
 	static ofResizeEventArgs resizeEventArgs;
-	
+
 	resizeEventArgs.width	= width;
 	resizeEventArgs.height	= height;
 	ofNotifyEvent( ofEvents().windowResized, resizeEventArgs );
@@ -414,9 +446,9 @@ void ofSendMessage(string messageString){
 }
 
 void ofNotifyWindowEntry( int state ) {
-	
+
 	static ofEntryEventArgs entryArgs;
 	entryArgs.state = state;
 	ofNotifyEvent(ofEvents().windowEntered, entryArgs);
-	
+
 }

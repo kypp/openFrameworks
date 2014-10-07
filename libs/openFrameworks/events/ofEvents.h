@@ -38,8 +38,9 @@ public:
 class ofKeyEventArgs : public ofEventArgs {
   public:
 	enum Type{
-		Pressed,
-		Released,
+		Released = 0,
+		Pressed = 1,
+		Repeated = 2
 	} type;
 	int key;
 	int keycode;
@@ -100,7 +101,7 @@ class ofMessage : public ofEventArgs{
 		}
 		string message;
 };
-		
+
 
 class ofCoreEvents {
   public:
@@ -255,6 +256,8 @@ void ofNotifyDraw();
 
 void ofNotifyKeyPressed(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
 void ofNotifyKeyReleased(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
+void ofNotifyKeyPressedGLFW(int keycode, int scancode, int codepoint, int action, int mod);
+void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int codepoint, int action, int mod);
 void ofNotifyKeyEvent(const ofKeyEventArgs & keyEvent);
 
 void ofNotifyMousePressed(int x, int y, int button);
