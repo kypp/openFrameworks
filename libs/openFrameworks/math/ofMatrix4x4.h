@@ -416,6 +416,7 @@ inline bool ofMatrix4x4::isNaN() const {
 	
 #if (_MSC_VER) || defined (TARGET_ANDROID)
 #ifndef isnan
+#define SHOULD_UNDEF_ISNAN
 #define isnan(a) ((a) != (a))
 #endif
 
@@ -433,7 +434,9 @@ return std::isnan(_mat[0][0]) || std::isnan(_mat[0][1]) || std::isnan(_mat[0][2]
 #endif
 	
 }
-
+#ifdef SHOULD_UNDEF_ISNAN
+#undef isnan
+#endif
 
 
 inline ostream& operator<<(ostream& os, const ofMatrix4x4& M) {
