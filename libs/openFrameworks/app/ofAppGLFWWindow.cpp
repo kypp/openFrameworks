@@ -239,6 +239,7 @@ void ofAppGLFWWindow::setupOpenGL(int w, int h, int screenMode){
 
 //--------------------------------------------
 void ofAppGLFWWindow::exit_cb(GLFWwindow* windowP_){
+	ofAppPtr->closeCallback();
 }
 
 //--------------------------------------------

@@ -19,6 +19,8 @@ class ofBaseApp : public ofBaseSoundInput, public ofBaseSoundOutput{
 		virtual void draw(){}
 		virtual void exit(){}
 
+		virtual void closeCallback() {};
+
 		virtual void windowResized(int w, int h){}
 
 		virtual void keyPressed( int key ){}
