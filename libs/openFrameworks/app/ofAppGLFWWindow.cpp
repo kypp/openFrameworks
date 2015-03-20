@@ -968,7 +968,7 @@ void ofAppGLFWWindow::resize_cb(GLFWwindow* windowP_,int w, int h) {
 //------------------------------------------------------------
 void ofAppGLFWWindow::setVerticalSync(bool bVerticalSync){
 	if(bVerticalSync){
-		glfwSwapInterval( 1);
+		glfwSwapInterval(1);
 	}else{
 		glfwSwapInterval(0);
 	}

@@ -25,6 +25,7 @@ class ofBaseApp : public ofBaseSoundInput, public ofBaseSoundOutput{
 
 		virtual void keyPressed( int key ){}
 		virtual void keyReleased( int key ){}
+		virtual void charInput( int key ){}
 
 		virtual void mouseMoved( int x, int y ){}
 		virtual void mouseDragged( int x, int y, int button ){}
@@ -62,6 +63,10 @@ class ofBaseApp : public ofBaseSoundInput, public ofBaseSoundOutput{
 		}
 		virtual void keyReleased( ofKeyEventArgs & key ){
 			keyReleased(key.key);
+		}
+		virtual void charInput( ofCharEventArgs & c ){
+			fprintf(stderr, "ofBaseApp: '%c'\n", c.codepoint);
+			charInput(c.codepoint);
 		}
 
 		virtual void mouseMoved( ofMouseEventArgs & mouse ){
