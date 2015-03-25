@@ -209,7 +209,6 @@ void ofNotifyKeyPressed(int key, int keycode, int scancode, int codepoint, int m
 	keyEventArgs.key = key;
 	keyEventArgs.keycode = keycode;
 	keyEventArgs.scancode = scancode;
-	keyEventArgs.codepoint = codepoint;
 	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyPressed, keyEventArgs );
 
@@ -253,13 +252,12 @@ void ofNotifyKeyReleased(int key, int keycode, int scancode, int codepoint, int 
 	keyEventArgs.key = key;
 	keyEventArgs.keycode = keycode;
 	keyEventArgs.scancode = scancode;
-	keyEventArgs.codepoint = codepoint;
 	keyEventArgs.mod = mod;
 	ofNotifyEvent( ofEvents().keyReleased, keyEventArgs );
 }
 
 //------------------------------------------
-void ofNotifyKeyPressedGLFW(int keycode, int scancode, int codepoint, int action, int mod)
+void ofNotifyKeyPressedGLFW(int keycode, int scancode, int action, int mod)
 {
 	static ofKeyEventArgs keyEventArgs;
 	pressedKeys.insert(keycode);
@@ -269,14 +267,13 @@ void ofNotifyKeyPressedGLFW(int keycode, int scancode, int codepoint, int action
 	keyEventArgs.scancode = scancode;
 	keyEventArgs.type = (ofKeyEventArgs::Type)action;
 	keyEventArgs.mod = mod;
-	keyEventArgs.codepoint = codepoint;
 	ofNotifyEvent(ofEvents().keyPressed, keyEventArgs);
 	if (keycode == 256 && bEscQuits == true) // "escape"
 		ofGetWindowPtr()->windowShouldClose();
 }
 
 //------------------------------------------
-void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int codepoint, int action, int mod)
+void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int action, int mod)
 {
 	static ofKeyEventArgs keyEventArgs;
 	pressedKeys.erase(keycode);
@@ -286,10 +283,17 @@ void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int codepoint, int actio
 	keyEventArgs.scancode = scancode;
 	keyEventArgs.type = (ofKeyEventArgs::Type)action;
 	keyEventArgs.mod = mod;
-	keyEventArgs.codepoint = codepoint;
 	ofNotifyEvent(ofEvents().keyReleased, keyEventArgs);
 }
 
+//------------------------------------------
+void ofNotifyCharInput(unsigned int codepoint)
+{
+	static ofCharEventArgs charEventArgs;
+
+	charEventArgs.codepoint = codepoint;
+	ofNotifyEvent(ofEvents().charInput, charEventArgs);
+}
 
 //------------------------------------------
 void ofNotifyKeyEvent(const ofKeyEventArgs & keyEvent){

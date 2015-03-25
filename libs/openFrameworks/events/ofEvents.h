@@ -46,6 +46,10 @@ class ofKeyEventArgs : public ofEventArgs {
 	int keycode;
 	int scancode;
 	int mod;
+};
+
+class ofCharEventArgs : public ofEventArgs {
+  public:
 	unsigned int codepoint;
 };
 
@@ -115,6 +119,7 @@ class ofCoreEvents {
 
 	ofEvent<ofKeyEventArgs> 	keyPressed;
 	ofEvent<ofKeyEventArgs> 	keyReleased;
+	ofEvent<ofCharEventArgs> 	charInput;
 
 	ofEvent<ofMouseEventArgs> 	mouseMoved;
 	ofEvent<ofMouseEventArgs> 	mouseDragged;
@@ -140,6 +145,7 @@ class ofCoreEvents {
 		exit.disable();
 		keyPressed.disable();
 		keyReleased.disable();
+		charInput.disable();
 		mouseDragged.disable();
 		mouseReleased.disable();
 		mousePressed.disable();
@@ -162,6 +168,7 @@ class ofCoreEvents {
 		exit.enable();
 		keyPressed.enable();
 		keyReleased.enable();
+		charInput.enable();
 		mouseDragged.enable();
 		mouseReleased.enable();
 		mousePressed.enable();
@@ -195,6 +202,7 @@ template<class ListenerClass>
 void ofRegisterKeyEvents(ListenerClass * listener, int prio=OF_EVENT_ORDER_AFTER_APP){
 	ofAddListener(ofEvents().keyPressed, listener, &ListenerClass::keyPressed,prio);
 	ofAddListener(ofEvents().keyReleased, listener, &ListenerClass::keyReleased,prio);
+	ofAddListener(ofEvents().charInput, listener, &ListenerClass::charInput,prio);
 }
 
 template<class ListenerClass>
@@ -228,6 +236,7 @@ template<class ListenerClass>
 void ofUnregisterKeyEvents(ListenerClass * listener, int prio=OF_EVENT_ORDER_AFTER_APP){
 	ofRemoveListener(ofEvents().keyPressed, listener, &ListenerClass::keyPressed,prio);
 	ofRemoveListener(ofEvents().keyReleased, listener, &ListenerClass::keyReleased,prio);
+	ofRemoveListener(ofEvents().charInput, listener, &ListenerClass::charInput,prio);
 }
 
 template<class ListenerClass>
@@ -256,8 +265,9 @@ void ofNotifyDraw();
 
 void ofNotifyKeyPressed(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
 void ofNotifyKeyReleased(int key, int keycode=-1, int scancode=-1, int codepoint=-1, int mod = 0);
-void ofNotifyKeyPressedGLFW(int keycode, int scancode, int codepoint, int action, int mod);
-void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int codepoint, int action, int mod);
+void ofNotifyKeyPressedGLFW(int keycode, int scancode, int action, int mod);
+void ofNotifyKeyReleasedGLFW(int keycode, int scancode, int action, int mod);
+void ofNotifyCharInput(unsigned int codepoint);
 void ofNotifyKeyEvent(const ofKeyEventArgs & keyEvent);
 
 void ofNotifyMousePressed(int x, int y, int button);
