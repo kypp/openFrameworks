@@ -68,13 +68,13 @@
 
 //--------------------------
 // audio
-#include "ofSoundStream.h"
-#include "ofSoundPlayer.h"
+// #include "ofSoundStream.h"
+// #include "ofSoundPlayer.h"
 
 //--------------------------
 // video
-#include "ofVideoGrabber.h"
-#include "ofVideoPlayer.h"
+// #include "ofVideoGrabber.h"
+// #include "ofVideoPlayer.h"
 
 //--------------------------
 // events

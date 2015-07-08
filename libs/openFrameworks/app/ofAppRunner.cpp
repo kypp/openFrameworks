@@ -3,10 +3,10 @@
 #include "ofBaseApp.h"
 #include "ofAppBaseWindow.h"
 
-#ifndef TARGET_NO_SOUND
-#include "ofSoundPlayer.h"
-#include "ofSoundStream.h"
-#endif
+// #ifndef TARGET_NO_SOUND
+// #include "ofSoundPlayer.h"
+// #include "ofSoundStream.h"
+// #endif
 
 #include "ofImage.h"
 #include "ofUtils.h"
@@ -22,9 +22,9 @@
 
 // TODO: closing seems wonky.
 // adding this for vc2010 compile: error C3861: 'closeQuicktime': identifier not found
-#if defined (TARGET_WIN32) || defined(TARGET_OSX)
-	#include "ofQtUtils.h"
-#endif
+// #if defined (TARGET_WIN32) || defined(TARGET_OSX)
+// 	#include "ofQtUtils.h"
+// #endif
 
 //========================================================================
 // static variables:
@@ -241,12 +241,12 @@ void ofExitCallback(){
     ofRemoveListener(ofEvents().messageEvent,OFSAptr.get(),&ofBaseApp::messageReceived,OF_EVENT_ORDER_APP);
     ofRemoveListener(ofEvents().fileDragEvent,OFSAptr.get(),&ofBaseApp::dragged,OF_EVENT_ORDER_APP);
 
-	#ifndef TARGET_NO_SOUND
-	//------------------------
-	// try to close engine if needed:
-	ofSoundShutdown();
-	//------------------------
-	#endif
+	// #ifndef TARGET_NO_SOUND
+	// //------------------------
+	// // try to close engine if needed:
+	// ofSoundShutdown();
+	// //------------------------
+	// #endif
 
 	// try to close quicktime, for non-linux systems:
 	#if defined(OF_VIDEO_CAPTURE_QUICKTIME) || defined(OF_VIDEO_PLAYER_QUICKTIME)
