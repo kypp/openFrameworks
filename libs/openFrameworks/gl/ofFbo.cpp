@@ -433,8 +433,10 @@ void ofFbo::allocate(int width, int height, int internalformat, int numSamples) 
 void ofFbo::allocate(Settings _settings) {
 	if(!checkGLSupport()) return;
 
+	ofLogVerbose("ofFbo") << "destroy";
 	destroy();
 
+	ofLogVerbose("ofFbo") << "after destroy";
 	// check that passed values are correct
 	if(_settings.width == 0) _settings.width = ofGetWidth();
 	if(_settings.height == 0) _settings.height = ofGetHeight();
@@ -443,6 +445,7 @@ void ofFbo::allocate(Settings _settings) {
 		_settings.numSamples = maxSamples();
 	}
 
+	ofLogVerbose("ofFbo") << "something";
 	if(_settings.depthStencilAsTexture && _settings.numSamples){
 		ofLogWarning("ofFbo") << "allocate(): multisampling not supported with depthStencilAsTexture, setting 0 samples for frame buffer object " << fbo;
 		_settings.numSamples = 0;
@@ -485,9 +488,15 @@ void ofFbo::allocate(Settings _settings) {
 	// create main fbo
 	// this is the main one we bind for drawing into
 	// all the renderbuffers are attached to this (whether MSAA is enabled or not)
+
+	ofLogVerbose("ofFbo") << "genearating buffer";
+	ofLogVerbose("ofFbo") << "glGenFramebuffers pointer " << (void*)glGenFramebuffers;
 	glGenFramebuffers(1, &fbo);
+	ofLogVerbose("ofFbo") << "genearated";
 	retainFB(fbo);
+	ofLogVerbose("ofFbo") << "retained";
 	bind();
+	ofLogVerbose("ofFbo") << "binded";
 
 	//- USE REGULAR RENDER BUFFER
 	if(!_settings.depthStencilAsTexture){
