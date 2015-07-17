@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ofEvents.h"
 #include "ofTypes.h"
 #include "ofUtils.h"
 
@@ -162,7 +161,7 @@ private:
 		string name;
 		ParameterType value, prevValue;
 		ParameterType min, max;
-		ofEvent<ParameterType> changedE;
+		// ofEvent<ParameterType> changedE;
 		bool bInNotify;
 		bool serializable;
 	};

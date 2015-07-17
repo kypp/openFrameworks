@@ -11,8 +11,21 @@
 #endif
 
 #include "ofAppBaseWindow.h"
-#include "ofEvents.h"
 #include "ofPixels.h"
+
+
+bool		ofGetMousePressed(int button=-1); //by default any button
+bool		ofGetKeyPressed(int key=-1); //by default any key
+
+int			ofGetMouseX();
+int			ofGetMouseY();
+
+int			ofGetPreviousMouseX();
+int			ofGetPreviousMouseY();
+
+void		ofSetFrameRate(int frame_rate);
+int         ofGetFrameNum();
+
 
 //class ofVec3f;
 class ofBaseApp;

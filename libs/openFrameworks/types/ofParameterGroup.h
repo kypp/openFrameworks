@@ -82,7 +82,7 @@ public:
 
 	void notifyParameterChanged(ofAbstractParameter & param);
 
-	ofEvent<ofAbstractParameter> parameterChangedE;
+	// ofEvent<ofAbstractParameter> parameterChangedE;
 
 	ofAbstractParameter & back();
 	ofAbstractParameter & front();

@@ -316,7 +316,6 @@ static int CALLBACK loadDialogBrowseCallback(
 ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection, string defaultPath, const wchar_t * formatstring){
 
 	ofFileDialogResult results;
-	int buffer_size = 1024 * 1024;
 
 	//----------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------       OSX

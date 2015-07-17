@@ -7,7 +7,6 @@
 #include "ofLog.h"
 #include "ofSystemUtils.h"
 #include "ofThread.h"
-#include "ofURLFileLoader.h"
 #include "ofUtils.h"
 
 //--------------------------
@@ -30,7 +29,6 @@
 // communication
 #if !defined( TARGET_OF_IOS ) & !defined(TARGET_ANDROID)
 	#include "ofSerial.h"
-	// #include "ofArduino.h"
 #endif
 
 //--------------------------
@@ -50,7 +48,7 @@
 //--------------------------
 // graphics
 #if !defined( TARGET_OF_IOS ) & !defined(TARGET_ANDROID)
-#include "ofCairoRenderer.h"
+	#include "ofCairoRenderer.h"
 #endif
 #include "ofGraphics.h"
 #include "ofImage.h"
@@ -67,24 +65,9 @@
 #include "ofAppRunner.h"
 
 //--------------------------
-// audio
-// #include "ofSoundStream.h"
-// #include "ofSoundPlayer.h"
-
-//--------------------------
-// video
-// #include "ofVideoGrabber.h"
-// #include "ofVideoPlayer.h"
-
-//--------------------------
-// events
-#include "ofEvents.h"
-
-//--------------------------
 // 3d
 #include "of3dUtils.h"
 #include "ofCamera.h"
-#include "ofEasyCam.h"
 #include "ofMesh.h"
 #include "ofNode.h"
 
