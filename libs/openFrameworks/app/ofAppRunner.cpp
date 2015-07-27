@@ -249,9 +249,9 @@ void ofExitCallback(){
 	// #endif
 
 	// try to close quicktime, for non-linux systems:
-	#if defined(OF_VIDEO_CAPTURE_QUICKTIME) || defined(OF_VIDEO_PLAYER_QUICKTIME)
-	closeQuicktime();
-	#endif
+	//#if defined(OF_VIDEO_CAPTURE_QUICKTIME) || defined(OF_VIDEO_PLAYER_QUICKTIME)
+	//closeQuicktime();
+	//#endif
 
 
 	//------------------------
