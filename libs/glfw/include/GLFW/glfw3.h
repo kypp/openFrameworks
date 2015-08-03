@@ -959,7 +959,7 @@ typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
  *
  *  @ingroup input
  */
-typedef void (* GLFWdropfun)(GLFWwindow*,int,const char**);
+typedef void (* GLFWdropfun)(GLFWwindow*,int,const wchar_t**);
 
 /*! @brief The function signature for monitor configuration callbacks.
  *
