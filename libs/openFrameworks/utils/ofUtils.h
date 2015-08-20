@@ -49,7 +49,7 @@ unsigned long long ofGetElapsedTimeMicros();
 
 /// \brief Get the number of frames rendered since the program started.
 /// \returns the number of frames rendered since the program started.
-int ofGetFrameNum();
+// int ofGetFrameNum();
 
 /// \brief Get the seconds after the minute.
 /// \returns the seconds after the minute [0-59].

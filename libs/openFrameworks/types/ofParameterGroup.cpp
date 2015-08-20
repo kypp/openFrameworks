@@ -221,7 +221,7 @@ bool ofParameterGroup::contains(string name){
 }
 
 void ofParameterGroup::notifyParameterChanged(ofAbstractParameter & param){
-	ofNotifyEvent(parameterChangedE,param);
+	// ofNotifyEvent(parameterChangedE,param);
 	if(getParent()) getParent()->notifyParameterChanged(param);
 }
 

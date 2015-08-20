@@ -1,7 +1,6 @@
 #include "ofImage.h"
 #include "ofAppRunner.h"
 #include "ofTypes.h"
-#include "ofURLFileLoader.h"
 #include "ofGraphics.h"
 #include "FreeImage.h"
 
@@ -201,7 +200,8 @@ template<typename PixelType>
 static bool loadImage(ofPixels_<PixelType> & pix, string fileName){
 	ofInitFreeImage();
 	if(fileName.substr(0, 7) == "http://") {
-		return ofLoadImage(pix, ofLoadURL(fileName).data);
+		throw std::runtime_error("Loading from url not supported no more.");
+		return false;
 	}
 	
 #ifdef _WIN32

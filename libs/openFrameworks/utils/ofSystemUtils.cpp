@@ -316,7 +316,6 @@ static int CALLBACK loadDialogBrowseCallback(
 ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection, string defaultPath, const wchar_t * formatstring){
 
 	ofFileDialogResult results;
-	int buffer_size = 1024 * 1024;
 
 	//----------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------       OSX
@@ -380,7 +379,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		ofn.lpstrFilter = formatstring;
 		ofn.lpstrFile = szFileName;
 #else // Visual Studio
-
+		const int buffer_size = 1024;
 		wchar_t* szFileName = new wchar_t[buffer_size];
 		wchar_t szTitle[MAX_PATH];
 		if(defaultPath!=""){

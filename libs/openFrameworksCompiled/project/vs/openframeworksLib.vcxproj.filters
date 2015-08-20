@@ -54,35 +54,11 @@
     <ClInclude Include="..\..\..\openFrameworks\ofMain.h">
       <Filter>libs\openFrameworks</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\app\ofAppGlutWindow.h">
-      <Filter>libs\openFrameworks\app</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\app\ofAppRunner.h">
       <Filter>libs\openFrameworks\app</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofSoundPlayer.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofSoundStream.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofQtUtils.h">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofVideoGrabber.h">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofVideoPlayer.h">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\communication\ofArduino.h">
-      <Filter>libs\openFrameworks\communication</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\communication\ofSerial.h">
       <Filter>libs\openFrameworks\communication</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\events\ofEvents.h">
-      <Filter>libs\openFrameworks\events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\events\ofEventUtils.h">
       <Filter>libs\openFrameworks\events</Filter>
@@ -101,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\types\ofRectangle.h">
       <Filter>libs\openFrameworks\types</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofDirectShowGrabber.h">
-      <Filter>libs\openFrameworks\video</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\app\ofAppBaseWindow.h">
       <Filter>libs\openFrameworks\app</Filter>
@@ -139,9 +112,6 @@
       <Filter>libs\openFrameworks\3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\3d\ofCamera.h">
-      <Filter>libs\openFrameworks\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\3d\ofEasyCam.h">
       <Filter>libs\openFrameworks\3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\3d\ofMesh.h">
@@ -225,29 +195,8 @@
     <ClInclude Include="..\..\..\openFrameworks\utils\ofThread.h">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\utils\ofURLFileLoader.h">
-      <Filter>libs\openFrameworks\utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\utils\ofUtils.h">
       <Filter>libs\openFrameworks\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofRtAudioSoundStream.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofBaseSoundPlayer.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofBaseSoundStream.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\sound\ofFmodSoundPlayer.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofQuickTimePlayer.h">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\video\ofQuickTimeGrabber.h">
-      <Filter>libs\openFrameworks\video</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\types\ofParameter.h">
       <Filter>libs\openFrameworks\types</Filter>
@@ -268,9 +217,6 @@
       <Filter>libs\openFrameworks\gl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\app\ofAppGLFWWindow.h">
-      <Filter>libs\openFrameworks\app</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\app\ofAppNoWindow.h">
       <Filter>libs\openFrameworks\app</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\utils\ofXml.h">
@@ -302,32 +248,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\openFrameworks\app\ofAppGlutWindow.cpp">
-      <Filter>libs\openFrameworks\app</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\app\ofAppRunner.cpp">
       <Filter>libs\openFrameworks\app</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\sound\ofSoundPlayer.cpp">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\sound\ofSoundStream.cpp">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofQtUtils.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofVideoGrabber.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofVideoPlayer.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\communication\ofArduino.cpp">
-      <Filter>libs\openFrameworks\communication</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\communication\ofSerial.cpp">
-      <Filter>libs\openFrameworks\communication</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\types\ofBaseTypes.cpp">
       <Filter>libs\openFrameworks\types</Filter>
@@ -337,12 +259,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\types\ofRectangle.cpp">
       <Filter>libs\openFrameworks\types</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofDirectShowGrabber.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\events\ofEvents.cpp">
-      <Filter>libs\openFrameworks\events</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\math\ofMath.cpp">
       <Filter>libs\openFrameworks\math</Filter>
@@ -360,9 +276,6 @@
       <Filter>libs\openFrameworks\3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\3d\ofCamera.cpp">
-      <Filter>libs\openFrameworks\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\3d\ofEasyCam.cpp">
       <Filter>libs\openFrameworks\3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\3d\ofMesh.cpp">
@@ -434,29 +347,14 @@
     <ClCompile Include="..\..\..\openFrameworks\utils\ofThread.cpp">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\utils\ofURLFileLoader.cpp">
-      <Filter>libs\openFrameworks\utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\utils\ofUtils.cpp">
       <Filter>libs\openFrameworks\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\sound\ofFmodSoundPlayer.cpp">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\sound\ofRtAudioSoundStream.cpp">
-      <Filter>libs\openFrameworks\sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\math\ofVec4f.cpp">
       <Filter>libs\openFrameworks\math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\math\ofVec2f.cpp">
       <Filter>libs\openFrameworks\math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofQuickTimeGrabber.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\video\ofQuickTimePlayer.cpp">
-      <Filter>libs\openFrameworks\video</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\types\ofParameter.cpp">
       <Filter>libs\openFrameworks\types</Filter>
@@ -483,9 +381,6 @@
       <Filter>libs\openFrameworks\gl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\app\ofAppGLFWWindow.cpp">
-      <Filter>libs\openFrameworks\app</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\app\ofAppNoWindow.cpp">
       <Filter>libs\openFrameworks\app</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\utils\ofXml.cpp">
@@ -515,5 +410,6 @@
     <ClCompile Include="..\..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
       <Filter>libs\addons\ofxNetwork</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\openFrameworks\communication\ofSerial.cpp" />
   </ItemGroup>
 </Project>

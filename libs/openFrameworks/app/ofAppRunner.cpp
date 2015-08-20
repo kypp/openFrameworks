@@ -3,28 +3,21 @@
 #include "ofBaseApp.h"
 #include "ofAppBaseWindow.h"
 
-#ifndef TARGET_NO_SOUND
-#include "ofSoundPlayer.h"
-#include "ofSoundStream.h"
-#endif
-
 #include "ofImage.h"
 #include "ofUtils.h"
-#include "ofEvents.h"
 #include "ofMath.h"
 #include "ofGraphics.h"
 #include "ofGLRenderer.h"
 #include "ofGLProgrammableRenderer.h"
 #include "ofTrueTypeFont.h"
-#include "ofURLFileLoader.h"
 #include "Poco/Net/NetSSL.h"
 
 
 // TODO: closing seems wonky.
 // adding this for vc2010 compile: error C3861: 'closeQuicktime': identifier not found
-#if defined (TARGET_WIN32) || defined(TARGET_OSX)
-	#include "ofQtUtils.h"
-#endif
+// #if defined (TARGET_WIN32) || defined(TARGET_OSX)
+// 	#include "ofQtUtils.h"
+// #endif
 
 //========================================================================
 // static variables:
@@ -36,17 +29,7 @@ static ofPtr<ofAppBaseWindow> 		window;
 
 //========================================================================
 // default windowing
-#ifdef TARGET_NODISPLAY
-	#include "ofAppNoWindow.h"
-#elif defined(TARGET_OF_IOS)
-	#include "ofAppiOSWindow.h"
-#elif defined(TARGET_ANDROID)
-	#include "ofAppAndroidWindow.h"
-#elif defined(TARGET_RASPBERRY_PI)
-	#include "ofAppEGLWindow.h"
-#else
-	#include "ofAppGLFWWindow.h"
-#endif
+#include "ofAppGLFWWindow.h"
 
 // this is hacky only to provide bw compatibility, a shared_ptr should always be initialized using a shared_ptr
 // it shouldn't be a problem since it's only called from main and never deleted from outside
@@ -56,9 +39,6 @@ static void noopDeleter(ofAppBaseWindow*){}
 void ofSetupOpenGL(ofAppBaseWindow * windowPtr, int w, int h, int screenMode){
 	ofSetupOpenGL(ofPtr<ofAppBaseWindow>(windowPtr,std::ptr_fun(noopDeleter)),w,h,screenMode);
 }
-
-void ofExitCallback();
-void ofURLFileLoaderShutdown();
 
 #if defined(TARGET_LINUX) || defined(TARGET_OSX)
 	#include <signal.h>
@@ -78,81 +58,62 @@ void ofURLFileLoaderShutdown();
 void ofRunApp(ofBaseApp * OFSA){
 
 	OFSAptr = ofPtr<ofBaseApp>(OFSA);
-	if(OFSAptr){
-		OFSAptr->mouseX = 0;
-		OFSAptr->mouseY = 0;
-	}
-
-#ifndef TARGET_ANDROID
-	atexit(ofExitCallback);
-#endif
+	// if(OFSAptr){
+	// 	OFSAptr->mouseX = 0;
+	// 	OFSAptr->mouseY = 0;
+	// }
 
 #if defined(TARGET_LINUX) || defined(TARGET_OSX)
 	// see http://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html#Termination-Signals
 	signal(SIGTERM, &sighandler);
-    signal(SIGQUIT, &sighandler);
+	signal(SIGQUIT, &sighandler);
 	signal(SIGINT,  &sighandler);
 
 	signal(SIGKILL, &sighandler); // not much to be done here
 	signal(SIGHUP,  &sighandler); // not much to be done here
 
 	// http://www.gnu.org/software/libc/manual/html_node/Program-Error-Signals.html#Program-Error-Signals
-    signal(SIGABRT, &sighandler);  // abort signal
+	signal(SIGABRT, &sighandler);  // abort signal
 #endif
 
 
-	#ifdef WIN32_HIGH_RES_TIMING
-		timeBeginPeriod(1);		// ! experimental, sets high res time
-								// you need to call timeEndPeriod.
-								// if you quit the app other than "esc"
-								// (ie, close the console, kill the process, etc)
-								// at exit wont get called, and the time will
-								// remain high res, that could mess things
-								// up on your system.
-								// info here:http://www.geisswerks.com/ryan/FAQS/timing.html
+#ifdef WIN32_HIGH_RES_TIMING
+	timeBeginPeriod(1);		// ! experimental, sets high res time
+							// you need to call timeEndPeriod.
+							// if you quit the app other than "esc"
+							// (ie, close the console, kill the process, etc)
+							// at exit wont get called, and the time will
+							// remain high res, that could mess things
+							// up on your system.
+							// info here:http://www.geisswerks.com/ryan/FAQS/timing.html
 
-	#endif
+#endif
 
 	window->initializeWindow();
 
 	ofSeedRandom();
 	ofResetElapsedTimeCounter();
 	ofSetWorkingDirectoryToDefault();
-	
 
-    ofAddListener(ofEvents().setup,OFSAptr.get(),&ofBaseApp::setup,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().update,OFSAptr.get(),&ofBaseApp::update,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().draw,OFSAptr.get(),&ofBaseApp::draw,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().exit,OFSAptr.get(),&ofBaseApp::exit,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().keyPressed,OFSAptr.get(),&ofBaseApp::keyPressed,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().keyReleased,OFSAptr.get(),&ofBaseApp::keyReleased,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseMoved,OFSAptr.get(),&ofBaseApp::mouseMoved,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseDragged,OFSAptr.get(),&ofBaseApp::mouseDragged,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mousePressed,OFSAptr.get(),&ofBaseApp::mousePressed,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseReleased,OFSAptr.get(),&ofBaseApp::mouseReleased,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().windowEntered,OFSAptr.get(),&ofBaseApp::windowEntry,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().windowResized,OFSAptr.get(),&ofBaseApp::windowResized,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().messageEvent,OFSAptr.get(),&ofBaseApp::messageReceived,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().fileDragEvent,OFSAptr.get(),&ofBaseApp::dragged,OF_EVENT_ORDER_APP);
 
 	window->runAppViaInfiniteLoop(OFSAptr.get());
 }
 
 //--------------------------------------
 void ofSetupOpenGL(ofPtr<ofAppBaseWindow> windowPtr, int w, int h, int screenMode){
-    if(!ofGetCurrentRenderer()) {
+	if(!ofGetCurrentRenderer()) {
 	#ifdef USE_PROGRAMMABLE_GL
-	    ofPtr<ofBaseRenderer> renderer(new ofGLProgrammableRenderer(false));
+		ofPtr<ofBaseRenderer> renderer(new ofGLProgrammableRenderer(false));
 	#else
-	    ofPtr<ofBaseRenderer> renderer(new ofGLRenderer(false));
+		ofPtr<ofBaseRenderer> renderer(new ofGLRenderer(false));
 	#endif
-	    ofSetCurrentRenderer(renderer,false);
-    }
+		ofSetCurrentRenderer(renderer,false);
+	}
 
 	window = windowPtr;
 
 	if(ofIsGLProgrammableRenderer()){
-        #if defined(TARGET_RASPBERRY_PI)
+		#if defined(TARGET_RASPBERRY_PI)
 		static_cast<ofAppEGLWindow*>(window.get())->setGLESVersion(2);
 		#elif defined(TARGET_LINUX_ARM)
 		static_cast<ofAppGLFWWindow*>(window.get())->setOpenGLVersion(2,0);
@@ -160,7 +121,7 @@ void ofSetupOpenGL(ofPtr<ofAppBaseWindow> windowPtr, int w, int h, int screenMod
 		static_cast<ofAppGLFWWindow*>(window.get())->setOpenGLVersion(3,2);
 		#endif
 	}else{
-	    #if defined(TARGET_LINUX_ARM) && !defined(TARGET_RASPBERRY_PI)
+		#if defined(TARGET_LINUX_ARM) && !defined(TARGET_RASPBERRY_PI)
 		static_cast<ofAppGLFWWindow*>(window.get())->setOpenGLVersion(1,0);
 		#endif
 	}
@@ -187,9 +148,9 @@ void ofGLReadyCallback(){
 	ofLogVerbose("ofAppRunner") << "Version:  " << (char*)glGetString(GL_VERSION);
 	ofLogVerbose("ofAppRunner") << "GLSL:     " << (char*)glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-    if(ofGetGLProgrammableRenderer()){
-    	ofGetGLProgrammableRenderer()->setup();
-    }
+	if(ofGetGLProgrammableRenderer()){
+		ofGetGLProgrammableRenderer()->setup();
+	}
 
 	//Default colors etc are now in ofGraphics - ofSetupGraphicDefaults
 	ofSetupGraphicDefaults();
@@ -200,17 +161,8 @@ void ofGLReadyCallback(){
 
 //--------------------------------------
 void ofSetupOpenGL(int w, int h, int screenMode){
-	#ifdef TARGET_NODISPLAY
-		window = ofPtr<ofAppBaseWindow>(new ofAppNoWindow());
-	#elif defined(TARGET_OF_IOS)
-		window = ofPtr<ofAppBaseWindow>(new ofAppiOSWindow());
-	#elif defined(TARGET_ANDROID)
-		window = ofPtr<ofAppBaseWindow>(new ofAppAndroidWindow());
-	#elif defined(TARGET_RASPBERRY_PI)
-		window = ofPtr<ofAppBaseWindow>(new ofAppEGLWindow());
-    #else
-		window = ofPtr<ofAppBaseWindow>(new ofAppGLFWWindow());
-	#endif
+
+	window = ofPtr<ofAppBaseWindow>(new ofAppGLFWWindow());
 
 	ofSetupOpenGL(window,w,h,screenMode);
 }
@@ -221,37 +173,7 @@ void ofSetupOpenGL(int w, int h, int screenMode){
 
 void ofExitCallback(){
 
-	ofNotifyExit();
-
-	ofURLFileLoaderShutdown();
-
-    ofRemoveListener(ofEvents().setup,OFSAptr.get(),&ofBaseApp::setup,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().update,OFSAptr.get(),&ofBaseApp::update,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().draw,OFSAptr.get(),&ofBaseApp::draw,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().exit,OFSAptr.get(),&ofBaseApp::exit,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().keyPressed,OFSAptr.get(),&ofBaseApp::keyPressed,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().keyReleased,OFSAptr.get(),&ofBaseApp::keyReleased,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().mouseMoved,OFSAptr.get(),&ofBaseApp::mouseMoved,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().mouseDragged,OFSAptr.get(),&ofBaseApp::mouseDragged,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().mousePressed,OFSAptr.get(),&ofBaseApp::mousePressed,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().mouseReleased,OFSAptr.get(),&ofBaseApp::mouseReleased,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().windowResized,OFSAptr.get(),&ofBaseApp::windowResized,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().windowEntered,OFSAptr.get(),&ofBaseApp::windowEntry,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().messageEvent,OFSAptr.get(),&ofBaseApp::messageReceived,OF_EVENT_ORDER_APP);
-    ofRemoveListener(ofEvents().fileDragEvent,OFSAptr.get(),&ofBaseApp::dragged,OF_EVENT_ORDER_APP);
-
-	#ifndef TARGET_NO_SOUND
-	//------------------------
-	// try to close engine if needed:
-	ofSoundShutdown();
-	//------------------------
-	#endif
-
-	// try to close quicktime, for non-linux systems:
-	#if defined(OF_VIDEO_CAPTURE_QUICKTIME) || defined(OF_VIDEO_PLAYER_QUICKTIME)
-	closeQuicktime();
-	#endif
-
+	OFSAptr->exit();
 
 	//------------------------
 	// try to close freeImage:
@@ -271,14 +193,10 @@ void ofExitCallback(){
 void ofRunApp(ofPtr<ofBaseApp> OFSA){
 
 	OFSAptr = OFSA;
-	if(OFSAptr){
-		OFSAptr->mouseX = 0;
-		OFSAptr->mouseY = 0;
-	}
-
-#ifndef TARGET_ANDROID
-	atexit(ofExitCallback);
-#endif
+	// if(OFSAptr){
+	// 	OFSAptr->mouseX = 0;
+	// 	OFSAptr->mouseY = 0;
+	// }
 
 	#ifdef WIN32_HIGH_RES_TIMING
 		timeBeginPeriod(1);		// ! experimental, sets high res time
@@ -295,21 +213,7 @@ void ofRunApp(ofPtr<ofBaseApp> OFSA){
 
 	ofSeedRandom();
 	ofResetElapsedTimeCounter();
-
-    ofAddListener(ofEvents().setup,OFSA.get(),&ofBaseApp::setup,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().update,OFSA.get(),&ofBaseApp::update,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().draw,OFSA.get(),&ofBaseApp::draw,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().exit,OFSA.get(),&ofBaseApp::exit,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().keyPressed,OFSA.get(),&ofBaseApp::keyPressed,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().keyReleased,OFSA.get(),&ofBaseApp::keyReleased,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseMoved,OFSA.get(),&ofBaseApp::mouseMoved,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseDragged,OFSA.get(),&ofBaseApp::mouseDragged,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mousePressed,OFSA.get(),&ofBaseApp::mousePressed,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().mouseReleased,OFSA.get(),&ofBaseApp::mouseReleased,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().windowEntered,OFSA.get(),&ofBaseApp::windowEntry,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().windowResized,OFSA.get(),&ofBaseApp::windowResized,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().messageEvent,OFSA.get(),&ofBaseApp::messageReceived,OF_EVENT_ORDER_APP);
-    ofAddListener(ofEvents().fileDragEvent,OFSA.get(),&ofBaseApp::dragged,OF_EVENT_ORDER_APP);
+	
 
 	window->runAppViaInfiniteLoop(OFSAptr.get());
 
