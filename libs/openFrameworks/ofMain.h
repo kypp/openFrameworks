@@ -47,9 +47,6 @@
 
 //--------------------------
 // graphics
-#if !defined( TARGET_OF_IOS ) & !defined(TARGET_ANDROID)
-	#include "ofCairoRenderer.h"
-#endif
 #include "ofGraphics.h"
 #include "ofImage.h"
 #include "ofPath.h"

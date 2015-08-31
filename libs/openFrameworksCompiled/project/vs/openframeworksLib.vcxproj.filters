@@ -150,9 +150,6 @@
     <ClInclude Include="..\..\..\openFrameworks\graphics\ofBitmapFont.h">
       <Filter>libs\openFrameworks\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\openFrameworks\graphics\ofCairoRenderer.h">
-      <Filter>libs\openFrameworks\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\openFrameworks\graphics\ofGraphics.h">
       <Filter>libs\openFrameworks\graphics</Filter>
     </ClInclude>
@@ -309,9 +306,6 @@
       <Filter>libs\openFrameworks\gl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\graphics\ofBitmapFont.cpp">
-      <Filter>libs\openFrameworks\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\openFrameworks\graphics\ofCairoRenderer.cpp">
       <Filter>libs\openFrameworks\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\openFrameworks\graphics\ofGraphics.cpp">

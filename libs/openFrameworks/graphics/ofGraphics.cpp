@@ -7,9 +7,6 @@
 #include "ofRendererCollection.h"
 #include "ofGLProgrammableRenderer.h"
 #include "ofGLRenderer.h"
-#if !defined(TARGET_OF_IOS) && !defined(TARGET_ANDROID)
-#include "ofCairoRenderer.h"
-#endif
 
 
 #ifndef TARGET_LINUX_ARM
@@ -62,10 +59,6 @@ void ofSetCurrentRenderer(const string & rendererType,bool setDefaults){
 		ofSetCurrentRenderer(ofPtr<ofBaseRenderer>(new ofGLProgrammableRenderer),setDefaults);
 	}else if(rendererType==ofGLRenderer::TYPE){
 		ofSetCurrentRenderer(ofPtr<ofBaseRenderer>(new ofGLRenderer),setDefaults);
-#if !defined(TARGET_OF_IOS) && !defined(TARGET_ANDROID)
-	}else if(rendererType==ofCairoRenderer::TYPE){
-		ofSetCurrentRenderer(ofPtr<ofBaseRenderer>(new ofCairoRenderer),setDefaults);
-#endif
 	}else{
 		ofLogError("ofGraphics") << "ofSetCurrentRenderer(): unknown renderer type " << rendererType << ", setting an ofGLRenderer";
 		ofLogError("ofGraphics") << "if you want to use a custom renderer, pass an ofPtr to a new instance of it";
@@ -98,10 +91,8 @@ ofPtr<ofBaseRenderer> & ofGetCurrentRenderer(){
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
-#include "ofCairoRenderer.h"
 #include "ofGLRenderer.h"
 
-static ofPtr<ofCairoRenderer> cairoScreenshot;
 static ofPtr<ofBaseRenderer> storedRenderer;
 static ofPtr<ofRendererCollection> rendererCollection;
 static bool bScreenShotStarted = false;
@@ -112,14 +103,10 @@ void ofBeginSaveScreenAsPDF(string filename, bool bMultipage, bool b3D, ofRectan
 	
 	storedRenderer = ofGetCurrentRenderer();
 	
-	cairoScreenshot = ofPtr<ofCairoRenderer>(new ofCairoRenderer);
-	cairoScreenshot->setup(filename, ofCairoRenderer::PDF, bMultipage, b3D, viewport); 		
 
 	rendererCollection = ofPtr<ofRendererCollection>(new ofRendererCollection);
 	rendererCollection->renderers.push_back(ofGetGLRenderer());
-	rendererCollection->renderers.push_back(cairoScreenshot);
 	
-	ofSetCurrentRenderer(cairoScreenshot, true);
 	bScreenShotStarted = true;
 }
 
@@ -127,11 +114,6 @@ void ofBeginSaveScreenAsPDF(string filename, bool bMultipage, bool b3D, ofRectan
 void ofEndSaveScreenAsPDF(){
 	if( bScreenShotStarted ){
 
-		if( cairoScreenshot ){
-			cairoScreenshot->close();
-			rendererCollection.reset();
-			cairoScreenshot.reset();
-		}
 		if( storedRenderer ){
 			ofSetCurrentRenderer(storedRenderer,true);
 			storedRenderer.reset();
