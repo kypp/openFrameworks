@@ -92,7 +92,6 @@ void ofRunApp(ofBaseApp * OFSA){
 	window->initializeWindow();
 
 	ofSeedRandom();
-	ofResetElapsedTimeCounter();
 	ofSetWorkingDirectoryToDefault();
 
 
@@ -212,7 +211,6 @@ void ofRunApp(ofPtr<ofBaseApp> OFSA){
 	window->initializeWindow();
 
 	ofSeedRandom();
-	ofResetElapsedTimeCounter();
 	
 
 	window->runAppViaInfiniteLoop(OFSAptr.get());
