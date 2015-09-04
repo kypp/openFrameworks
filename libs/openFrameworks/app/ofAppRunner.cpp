@@ -10,7 +10,6 @@
 #include "ofGLRenderer.h"
 #include "ofGLProgrammableRenderer.h"
 #include "ofTrueTypeFont.h"
-#include "Poco/Net/NetSSL.h"
 
 
 // TODO: closing seems wonky.
