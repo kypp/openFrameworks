@@ -17,9 +17,17 @@ include_directories (
 	math
 	3d
 	gl
-	events)
+	events
+	addons/ofxXmlSettings/libs)
 
 file (GLOB INSTALL_HEADERS *.h 3d/*.h communication/*.h gl/*.h graphics/*.h math/*.h types/*.h utils/*.h addons/ofxNetwork/src/*.h addons/ofxXmlSettings/src/*.h app/*.h events/*.h)
+
+set (FREETYPE_INCLUDE_DIR "" CACHE STRING "freetype2 include directory")
+set (FREEIMAGE_INCLUDE_DIR "" CACHE STRING "freeimage include directory")
+set (GLEW_INCLUDE_DIR "" CACHE STRING "GLEW include directory")
+set (TESS2_INCLUDE_DIR "" CACHE STRING "tess2 include directory")
+set (POCO_INCLUDE_DIR "" CACHE STRING "Poco include directory")
+set (GLFW_INCLUDE_DIR "" CACHE STRING "GLFW3 include directory")
 
 include_directories (
 	${FREETYPE_INCLUDE_DIR}

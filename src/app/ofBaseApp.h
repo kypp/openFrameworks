@@ -28,7 +28,7 @@ class ofBaseApp {
 		virtual void mouseReleased(int x, int y, int button){}
 		virtual void mouseScrolled(double x, double y){}
 		
-		virtual void dragEvent(std::vector<std::wstring> files) = 0;
+		virtual void dragEvent(std::vector<std::string> files) = 0;
 	
 		// virtual void windowEntry(int state){}
 		

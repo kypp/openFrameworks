@@ -157,7 +157,7 @@ void ofDisableDataPath(){
 //--------------------------------------------------
 string defaultDataPath(){
 #if defined TARGET_OSX
-	return string("../../../data/");
+	return string("data/");
 #elif defined TARGET_ANDROID
 	return string("sdcard/");
 #elif defined(TARGET_LINUX) || defined(TARGET_WIN32)

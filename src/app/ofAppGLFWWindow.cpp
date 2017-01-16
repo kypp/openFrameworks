@@ -1002,22 +1002,13 @@ void ofAppGLFWWindow::scroll_cb(GLFWwindow* windowP_, double x, double y) {
 }
 
 //------------------------------------------------------------
-void ofAppGLFWWindow::drop_cb(GLFWwindow* windowP_, int count, const wchar_t** names) {
-	std::vector<std::wstring> files;
+void ofAppGLFWWindow::drop_cb(GLFWwindow* windowP_, int count, const char** names) {
+	std::vector<std::string> files;
 	files.resize(count);
-#ifdef TARGET_LINUX
-	for (size_t i = 0; i < files.size(); ++i)
-		files[i] = Poco::URI(names[i]).getPath();
-#endif
-#ifdef TARGET_WIN32
+
 	for (size_t i = 0; i < files.size(); ++i)
 		files[i] = names[i];
-		//files[i] = ofConvertToLocalUTF8(names[i]);
-#endif
-#ifdef TARGET_OSX
-	for (size_t i = 0; i < files.size(); ++i)
-		files[i] = names[i];
-#endif
+
 	ofAppPtr->dragEvent(files);
 }
 
