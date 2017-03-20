@@ -1578,7 +1578,7 @@ ofMesh ofMesh::sphere( float radius, int res, ofPrimitiveMode mode ) {
     ofMesh mesh;
     
     float doubleRes = res*2.f;
-    float polarInc = PI/(res); // ringAngle
+    float polarInc = OPENFRAMEWORKS_PI_CONSTANT/(res); // ringAngle
     float azimInc = TWO_PI/(doubleRes); // segAngle //
     
     if(mode != OF_PRIMITIVE_TRIANGLE_STRIP && mode != OF_PRIMITIVE_TRIANGLES) {
@@ -1591,8 +1591,8 @@ ofMesh ofMesh::sphere( float radius, int res, ofPrimitiveMode mode ) {
     
     for(float i = 0; i < res+1; i++) {
         
-        float tr = sin( PI-i * polarInc );
-        float ny = cos( PI-i * polarInc );
+        float tr = sin( OPENFRAMEWORKS_PI_CONSTANT-i * polarInc );
+        float ny = cos( OPENFRAMEWORKS_PI_CONSTANT-i * polarInc );
         
         tcoord.y = i / res;
         
@@ -1809,7 +1809,7 @@ ofMesh ofMesh::icosphere(float radius, int iterations) {
         float alpha;
         alpha = atan2f(vec.z,vec.x);
         u = alpha/TWO_PI+.5f;
-        v = atan2f(vec.y, r0)/PI + .5f;
+        v = atan2f(vec.y, r0)/OPENFRAMEWORKS_PI_CONSTANT + .5f;
         // reverse the u coord, so the default is texture mapped left to
         // right on the outside of a sphere //
         texCoords.push_back(ofVec2f(1.0-u,v));

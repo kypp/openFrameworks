@@ -250,8 +250,8 @@ float ofAngleDifferenceRadians(float currentAngle, float targetAngle);
 /// \returns to The ceiling of the range.
 float ofWrap(float value, float from, float to);
 
-// \brief Convenience function for ofMath::ofWrap(), constrained between -PI...PI
-float ofWrapRadians(float angle, float from = -PI, float to=+PI);
+// \brief Convenience function for ofMath::ofWrap(), constrained between -OPENFRAMEWORKS_PI_CONSTANT...OPENFRAMEWORKS_PI_CONSTANT
+float ofWrapRadians(float angle, float from = -OPENFRAMEWORKS_PI_CONSTANT, float to=+OPENFRAMEWORKS_PI_CONSTANT);
 
 // \brief Convenience function for ofMath::ofWrap(), constrained between -180...180
 float ofWrapDegrees(float angle, float from = -180, float to=+180);
@@ -366,7 +366,7 @@ template<typename Type>
 Type ofInterpolateCosine(Type y1, Type y2, float pct){
 	float pct2;
 
-	pct2 = (1-cos(pct*PI))/2;
+	pct2 = (1-cos(pct*OPENFRAMEWORKS_PI_CONSTANT))/2;
 	return(y1*(1-pct2)+y2*pct2);
 }
 

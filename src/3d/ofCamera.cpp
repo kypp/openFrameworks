@@ -50,7 +50,7 @@ void ofCamera::setupPerspective(bool _vFlip, float fov, float nearDist, float fa
 	ofRectangle orientedViewport = ofGetNativeViewport();
 	float eyeX = orientedViewport.width / 2;
 	float eyeY = orientedViewport.height / 2;
-	float halfFov = PI * fov / 360;
+	float halfFov = OPENFRAMEWORKS_PI_CONSTANT * fov / 360;
 	float theTan = tanf(halfFov);
 	float dist = eyeY / theTan;
 
@@ -120,7 +120,7 @@ bool ofCamera::getOrtho() const {
 
 //----------------------------------------
 float ofCamera::getImagePlaneDistance(ofRectangle viewport) const {
-	return viewport.height / (2.0f * tanf(PI * fov / 360.0f));
+	return viewport.height / (2.0f * tanf(OPENFRAMEWORKS_PI_CONSTANT * fov / 360.0f));
 }
 
 //----------------------------------------

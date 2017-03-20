@@ -355,8 +355,8 @@ typedef ofBaseApp ofSimpleApp;
 #include <cfloat>
 using namespace std;
 
-#ifndef PI
-	#define PI       3.14159265358979323846
+#ifndef OPENFRAMEWORKS_PI_CONSTANT
+	#define OPENFRAMEWORKS_PI_CONSTANT       3.14159265358979323846
 #endif
 
 #ifndef TWO_PI
@@ -376,11 +376,11 @@ using namespace std;
 #endif
 
 #ifndef DEG_TO_RAD
-	#define DEG_TO_RAD (PI/180.0)
+	#define DEG_TO_RAD (OPENFRAMEWORKS_PI_CONSTANT/180.0)
 #endif
 
 #ifndef RAD_TO_DEG
-	#define RAD_TO_DEG (180.0/PI)
+	#define RAD_TO_DEG (180.0/OPENFRAMEWORKS_PI_CONSTANT)
 #endif
 
 #ifndef MIN
